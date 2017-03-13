@@ -28,10 +28,10 @@ def getCCC(pvarfe,pvarexp,meanofdiff,meanfe,meanexp):
     answer = 1 - (meanofdiff / bottom)
     return answer
 
-def run(infile):
+def run(infile,headername1,headername2):
     data = pandas.read_csv(infile,header = 0)
-    expdata = data['Exp'].tolist()
-    fedata = data['FE'].tolist()
+    expdata = data[headername1].tolist()
+    fedata = data[headername2].tolist()
     meanfe = getMean(fedata)
     meanexp = getMean(expdata)
     meanofdiff = getMeanofDiffs(fedata,expdata)
@@ -40,4 +40,4 @@ def run(infile):
     print('meanfe = ' + str(meanfe) + '\nmeanexp = ' + str(meanexp) + '\npvarfe = ' +str(pvarfe) + '\npvarexp = ' + str(pvarexp))
     print('ccc = ' + str(getCCC(pvarfe,pvarexp,meanofdiff,meanfe,meanexp)))
 
-run('values.txt')
+run('values.txt','Exp','FE')
